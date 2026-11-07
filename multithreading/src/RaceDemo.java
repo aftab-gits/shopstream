@@ -2,13 +2,17 @@ public class RaceDemo {
 
     static int counter=0;
 
+    static synchronized void increment() {
+        counter++;
+    }
+
     public static  void main(String[] args){
 
         System.out.println("Race demo Tutorial");
 
         Runnable task = ()->{
             for(int i = 1 ; i<=100000 ; i++){
-                counter++;
+                increment();
             }
         };
 

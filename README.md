@@ -44,3 +44,9 @@ Started: Nov 5, 2026
 - With 1000 iterations I got 2000 every time. The loop finishes within one time slice (or before the other thread starts), so the threads never overlap.
 - Small workloads hide race conditions. More iterations means more overlap and more lost updates.
 - A correct result on one run doesn't prove the code is thread-safe.
+
+## Day 4
+Private fields plus returning copies means outside code can change data only through my methods.
+Local variables live on each thread’s own stack, so they’re safe. Static fields and shared objects are shared, so they need protection.
+Race conditions need shared and changeable data. Remove either one and the problem disappears.
+synchronized lets only one thread at a time run the protected code. Without it, I got wrong totals again.
