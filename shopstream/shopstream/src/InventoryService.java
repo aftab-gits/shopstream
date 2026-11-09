@@ -9,6 +9,12 @@ public class InventoryService {
     private final List<Product> listOfProduct = new ArrayList<>();
 
     public void addProduct(Product product){
+
+        if(product.price()<=0){
+            throw  new InvalidPriceException(product.id());
+        }
+
+
         listOfProduct.add(product);
     }
 
@@ -20,6 +26,15 @@ public class InventoryService {
         }
 
         return Optional.empty();
+    }
+
+    public Product getById(int id){
+       Optional<Product> p =  findById(id);
+       if(p.isPresent()){
+           return  p.get();
+       }
+
+       throw new ProductNotFoundException(id);
     }
 
     public List<Product>  getAllProduct(){
@@ -45,6 +60,21 @@ public class InventoryService {
 
     public boolean removeProduct(int id) {
         return listOfProduct.removeIf(p -> p.id() == id);
+    }
+
+    public void reduceStock(int id, int quantity){
+        int index=-1;
+        for(Product p : listOfProduct){
+            index++;
+            if(p.id()==id){
+                if(p.quantity()<quantity){
+                    throw new InsufficeientStockException(id,quantity);
+                }
+                listOfProduct.set(index,new Product(id,p.name(),p.price(),quantity));
+
+            }
+        }
+
     }
 
 }
