@@ -50,3 +50,6 @@ Private fields plus returning copies means outside code can change data only thr
 Local variables live on each thread’s own stack, so they’re safe. Static fields and shared objects are shared, so they need protection.
 Race conditions need shared and changeable data. Remove either one and the problem disappears.
 synchronized lets only one thread at a time run the protected code. Without it, I got wrong totals again.
+
+## Day 5
+Added custom exceptions, tried  thorows, try catch 
