@@ -32,3 +32,10 @@ Race conditions need shared and changeable data. Remove either one and the probl
 synchronized lets only one thread at a time run the protected code. Without it, I got wrong totals again.
 
 
+## Day 5
+- A stream is lazy. Intermediate steps (filter, map, sorted) only describe the work.
+- A terminal step (toList, count, forEach) starts the pipeline and produces the result.
+- Proof (lazyDemo): with no terminal step, the filter lambda never ran. With toList() or count(), it ran for each product.
+- A stream with no terminal step compiles but does nothing.
+
+
