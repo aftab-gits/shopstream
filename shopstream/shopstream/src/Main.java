@@ -25,29 +25,29 @@ public class Main{
       int id1=6;
 
 
-        try{
-            Optional<Product> product = inventoryService.findById(id1);
-            if(product.isPresent()){
-                System.out.println("Product found is "+product.get().name());
-            }
-            else
-            {
-                throw new ProductNotFoundException(id1);
-            }
-
-        }
-        catch(ProductNotFoundException e){
-            System.out.println("Exception caught in catch block "+e.getMessage());
-
-        }
-
-        try{
-            Product p = inventoryService.getById( id1);
-            System.out.println("getById returned a product ");
-        }
-        catch (ProductNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+//        try{
+//            Optional<Product> product = inventoryService.findById(id1);
+//            if(product.isPresent()){
+//                System.out.println("Product found is "+product.get().name());
+//            }
+//            else
+//            {
+//                throw new ProductNotFoundException(id1);
+//            }
+//
+//        }
+//        catch(ProductNotFoundException e){
+//            System.out.println("Exception caught in catch block "+e.getMessage());
+//
+//        }
+//
+//        try{
+//            Product p = inventoryService.getById( id1);
+//            System.out.println("getById returned a product ");
+//        }
+//        catch (ProductNotFoundException e){
+//            System.out.println(e.getMessage());
+//        }
 
 
 
@@ -69,7 +69,7 @@ public class Main{
 //        inventoryService.printLowStock();
 
         try {
-            inventoryService.reduceStock(1,21);
+            inventoryService.reduceStock(1,2);
             System.out.println("Stock update for "+inventoryService.getById(1));
         }
         catch (InsufficeientStockException e){

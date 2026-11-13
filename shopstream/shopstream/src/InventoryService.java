@@ -62,18 +62,41 @@ public class InventoryService {
         return listOfProduct.removeIf(p -> p.id() == id);
     }
 
-    public void reduceStock(int id, int quantity){
+    public static int findIndex(List<Product> list ,int id){
         int index=-1;
-        for(Product p : listOfProduct){
+
+        for(Product p : list){
             index++;
             if(p.id()==id){
-                if(p.quantity()<quantity){
-                    throw new InsufficeientStockException(id,quantity);
-                }
-                listOfProduct.set(index,new Product(id,p.name(),p.price(),quantity));
-
+                return index;
             }
         }
+        return index;
+    }
+
+    public void reduceStock(int id, int quantity){
+
+        if(quantity<0)
+        {
+            throw new IllegalArgumentException("Quantity must be greater than 0");
+        }
+
+        Product p = getById(id);
+
+        if(p.quantity()<quantity){
+            throw new InsufficeientStockException(id,quantity);
+
+
+        }
+        else {
+            p = new Product(id,p.name(),p.price(),p.quantity()-quantity);
+        }
+
+
+        int index = findIndex(listOfProduct,id);
+
+        listOfProduct.set(index,p);
+
 
     }
 
