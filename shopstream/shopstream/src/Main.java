@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,17 +13,17 @@ public class Main{
         }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         InventoryService inventoryService = new InventoryService();
-        tryAdd(inventoryService,new Product(1,"Phone",9999,6));
-        tryAdd(inventoryService,new Product(2,"Laptop",49999,1));
-        tryAdd(inventoryService,new Product(3,"TV",1000,5));
+        tryAdd(inventoryService, new Product(1, "Phone", 9999, 6));
+        tryAdd(inventoryService, new Product(2, "Laptop", 49999, 1));
+        tryAdd(inventoryService, new Product(3, "TV", 1000, 5));
 
-      List<Product> allProduct= inventoryService.getAllProduct();
-      System.out.println("All Products are :\n "+allProduct);
+//        List<Product> allProduct = inventoryService.getAllProduct();
+//        System.out.println("All Products are :\n " + allProduct);
 
-      int id1=6;
+        int id1 = 6;
 
 
 //        try{
@@ -50,7 +51,6 @@ public class Main{
 //        }
 
 
-
 //        Optional<Product> product1 = inventoryService.findByName("Laptop");
 //        if(product1.isPresent()){
 //            System.out.println("Product Found is "+ product1.get());
@@ -68,23 +68,25 @@ public class Main{
 //        }
 //        inventoryService.printLowStock();
 
-        try {
-            inventoryService.reduceStock(1,2);
-            System.out.println("Stock update for "+inventoryService.getById(1));
-        }
-        catch (InsufficeientStockException e){
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            inventoryService.reduceStock(1,2);
+//            System.out.println("Stock update for "+inventoryService.getById(1));
+//        }
+//        catch (InsufficeientStockException e){
+//            System.out.println(e.getMessage());
+//    }
 //
 //        inventoryService.getAllProduct().clear();
 //       System.out.println("Size after clear is "+ inventoryService.getAllProduct().size());
 
+//        System.out.println(inventoryService.getProductsAbove(3000));
+//        System.out.println(inventoryService.getProductNames());
+
+        System.out.println("Producsts sorted by price are "+ inventoryService.getProductsSortedByPrice());
+
+        inventoryService.lazyDemo();
+
+
 
     }
-
-
-
-
-
-
 }

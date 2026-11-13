@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+
 
 
 public class InventoryService {
@@ -99,5 +101,45 @@ public class InventoryService {
 
 
     }
+
+
+    public List<Product> getProductsAbove(double minPrice){
+
+        List<Product> list = listOfProduct.stream()
+                            .filter(p->p.price()>minPrice)
+                            .toList();
+
+        return list;
+    }
+
+    public long countExpensive(double minPrice){
+
+        return listOfProduct.stream().filter(p->p.price()>minPrice).count();
+
+    }
+
+    public List<Product> getLowStockProducts(int stock){
+
+        List<Product> list = listOfProduct.stream()
+                .filter(p->p.quantity()<stock)
+                .toList();
+
+        return list;
+    }
+
+    public List<String> getProductNames(){
+
+        return listOfProduct.stream().map(p->p.name()).toList();
+
+    }
+
+
+    public List<Product> getProductsSortedByPrice(){
+
+        return listOfProduct.stream().sorted(Comparator.comparingDouble(Product::price)).toList();
+    }
+
+    
+
 
 }
